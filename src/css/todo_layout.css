@@ -33,6 +33,10 @@ form {
 form button, form h5 {
   margin: 20px 0;
 }
+.list_item_card_description {
+  position: absolute;
+  left: 2%;
+}
 
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
@@ -46,5 +50,37 @@ input[type=text]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label,
 input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
-  color: #ec407a !important;
+  color: #29ff69 !important;
+}
+#newListButtonPosition{
+  left: 44%;
+}
+.Button_bar {
+  overflow: hidden;
+  background-color:#669966;
+  font-family: Arial;
+  height: 50px;
+  margin: auto;
+}
+.Task,.Due_Date,.Status{
+  float: left;
+  font-size: 30px;
+  margin-left: 6.5%;
+  cursor: pointer;
+}
+.description,.due_date,.completed{
+  float: left;
+  position: absolute;
+}
+.description{
+  left: 6%;
+}
+.due_date{
+  left: 21%;
+}
+.completed{
+  left: 42%;
+}
+#move_up,#move_down,#delete{
+  left: 62%;
 }
