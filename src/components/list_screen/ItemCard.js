@@ -1,6 +1,6 @@
 import React from 'react';
-
-
+import ItemScreen from '../ItemScreen';
+import { Link } from 'react-router-dom'
 class ItemCard extends React.Component {
     setColor = (e) =>{
         if(e){
@@ -23,11 +23,16 @@ class ItemCard extends React.Component {
                     </div>
         }
     }
+    editCard = (e) =>{
+        //return <Link to ="/todoList/:id/newItem"/>
+        console.log(this.props.todoList)
+    }
 
     render() {
         const { item } = this.props;  
         return (
-            <div className="card z-depth-0 todo-list-link pink-lighten-3">
+            <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }  >
+                <div className="card z-depth-0 todo-list-link pink-lighten-3" >
                 <div className="card-content grey-text text-darken-3">
                     <span className="card-title float">
                         <div className="description">{item.description}</div>
@@ -41,6 +46,7 @@ class ItemCard extends React.Component {
                 </div>
                 <hr/>
             </div>
+            </Link>
         );
     }
 }
