@@ -5,7 +5,9 @@ import { compose } from 'redux';
 import ItemsList from './ItemsList.js'
 import { firestoreConnect } from 'react-redux-firebase';
 
-
+var a = true;
+var b = true;
+var c = true;
 class ListScreen extends Component {
     state = {
         name: '',
@@ -42,8 +44,73 @@ class ListScreen extends Component {
         let att = attr
         ref.update({[att]:data})
     }
-    
-  
+
+    sortByTask =(e) =>{
+        console.log("Task")
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items;
+        if(a){
+            tempItems.sort((a, b) => (a.description > b.description) ? 1 : -1)
+            a = false
+        }else{
+            tempItems.sort((a, b) => (a.description > b.description) ? -1 : 1)
+            a = true
+        }
+        for(let i = 0;i<tempItems.length;i++){
+            tempItems[i].key = i;
+            tempItems[i].id = i;
+            // delete tempItems.id;
+        }
+        
+        ref.update({
+            "items" : tempItems
+        }).then(console.log("Successfully update orderBy description"))
+    }
+    sortByDue =() =>{
+        console.log("due")
+        
+
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items;
+        if(b){
+            tempItems.sort((a, b) => (a.due_date > b.due_date) ? 1 : -1)
+            b = false
+        }else{
+            tempItems.sort((a, b) => (a.due_date > b.due_date) ? -1 : 1)
+            b = true
+        }
+        for(let i = 0;i<tempItems.length;i++){
+            tempItems[i].key = i;
+            tempItems[i].id = i;
+            // delete tempItems.key;
+        }
+        
+        ref.update({
+            "items" : tempItems
+        }).then(console.log("Successfully update orderBy due"))
+    }
+    sortByStatus =() =>{
+        console.log("Task")
+
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items;
+        if(c){
+            tempItems.sort((a, b) => (a.completed > b.completed) ? 1 : -1) // asc
+            c = false
+        }else{
+            tempItems.sort((a, b) => (a.completed > b.completed) ? -1 : 1) // des
+            c = true
+        }
+        for(let i = 0;i<tempItems.length;i++){
+            tempItems[i].key = i;
+            tempItems[i].id = i;
+            // delete tempItems.key;
+        }
+        
+        ref.update({
+            "items" : tempItems
+        }).then(console.log("Successfully update orderBy status"))
+    }
 
     render() {
         const auth = this.props.auth;
@@ -56,7 +123,7 @@ class ListScreen extends Component {
             return <React.Fragment />
         return (
 
-            <div className="container white">
+            <div className="container light-blue lighten-5">
                 <h5 className="grey-text text-darken-3">Todo List</h5>
                 <div className="input-field">
                     <label htmlFor="email" className="active">Name</label>
@@ -66,14 +133,16 @@ class ListScreen extends Component {
                     <label htmlFor="password" className = "active">Owner</label>
                     <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
-                <div className="Button_bar">
-                    <div className="Task">Task</div>
-                    <div className="Due_Date">Due Date</div>
-                    <div className="Status">Status</div>
+                <nav>
+                <div className="nav-wrapper grey darken-3">
+                    <div className="Task" onClick={this.sortByTask}>Task</div>
+                    <div className="Due_Date" onClick={this.sortByDue}>Due Date</div>
+                    <div className="Status" onClick={this.sortByStatus}>Status</div>
                 </div>
+                </nav>
                 <ItemsList todoList={todoList} />
                 <div>
-                <a id="newListButtonPosition" class="btn-floating btn-large waves-effect waves-light green" href = {'/todoList/'+todoList.id+'/temp/newItem'}>
+                <a id="newListButtonPosition" class="btn-floating btn-middle waves-effect waves-light green" href = {'/todoList/'+todoList.id+'/temp/newItem'}>
                     <i class="material-icons">
                         add
                     </i>

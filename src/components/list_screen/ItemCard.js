@@ -1,8 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {Button} from 'react-materialize';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { Link } from 'react-router-dom'
+
+
+
 class ItemCard extends React.Component {
     
     setColor = (e) =>{
@@ -11,7 +14,7 @@ class ItemCard extends React.Component {
             
             // return "Completed"
             let color ={
-                color:"#00FF40"
+                color:"#2e7d32"
             }
             return <div className ="completed" style ={color}>
                     Completed
@@ -58,6 +61,7 @@ class ItemCard extends React.Component {
         }else{
             console.log("first element")
         }
+        
     }
     move_down = () => {
         let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
@@ -113,33 +117,43 @@ class ItemCard extends React.Component {
     }
     editCard = (e) =>{
         //return <Link to ="/todoList/:id/newItem"/>
-        e.stopPropagation()
         console.log("up")
     }
 
     render() {
         const { item } = this.props; 
-        
         return (
             
-                <div className="card z-depth-0 todo-list-link pink-lighten-3" >
-                <div className="card-content grey-text text-darken-3  ">
+                <div className="card z-depth-0 todo-list-link pink lighten-3" >
+                <div className=" teal lighten-4">
                     <span className="card-title float">
                         <div className="description">{item.description}</div>
                         <div className="due_date">{item.due_date}</div>
                         {this.setColor(item.completed)}
-                        
-                        <button id="move_up" className="btn-floating btn-large waves-effect waves-light green" onClick={this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
-                        <button id="move_down" className="btn-floating btn-large waves-effect waves-light green" onClick={this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
-                        <button id="delete" className="btn-floating btn-large waves-effect waves-light green" onClick={this.deleteItme}><i class="material-icons">clear</i></button>
-                        
-                        <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }><button id="edit" className='btn-floating btn-large waves-effect waves-light green'><i className='material-icons'>edit</i></button></Link>
-                        
+                                {/* <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }>
+                                    <button id="edit" className='speicalB' >
+                                        <i className='material-icons'>edit</i>
+                                        </button>
+                                </Link> */}
+                                
+                                <div className="navBar"  > 
+                                    <div className="anim"> 
+                                    
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                                        
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
+                                        
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
+                                        <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }>
+
+                                        </Link>
+                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light red" ></a>
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light red"  ><i className="material-icons">menu</i></button>
+                                    </div>
+                                </div>   
                     </span>
                     <div className="card-content">{"Assigned_to:   "+ item.assigned_to}</div>   
-
                 </div>
-                <hr/>
             </div>
         
         );

@@ -125,8 +125,10 @@ export class ItemScreen extends Component {
                         <hr/>
                         <div className="row">
                             <div className="input-field col s12">
-                                <a href ="#" onClick ={this.submitPage} target = "_self">submit</a>
-                                <a href={'/todoList/'+this.props.idOfTodoLists}>Cancel</a>
+                                <a href ="#" onClick ={this.submitPage} target = "_self" className="waves-effect waves-light btn-small">submit
+                                <i className="material-icons right">send</i></a>
+                                <a href={'/todoList/'+this.props.idOfTodoLists} className="waves-effect waves-light btn-small">Cancel
+                                <i className="material-icons">  cancel_schedule_send</i></a>
                             </div>
                         </div>
                     </form>
@@ -184,8 +186,10 @@ export class ItemScreen extends Component {
                         <hr/>
                         <div className="row">
                             <div className="input-field col s12">
-                                <a href ='#' onClick ={this.submitPage} target = "_self">submit</a>
-                                <a href={'/todoList/'+this.props.idOfTodoLists}>Cancel</a>
+                            <a href ="#" onClick ={this.submitPage} target = "_self" className="waves-effect waves-light btn-small">submit
+                                <i className="material-icons right">radio_button_checked</i></a>
+                                <a href={'/todoList/'+this.props.idOfTodoLists} className="waves-effect waves-light btn-small">Cancel
+                                <i className="material-icons">  radio_button_unchecked</i></a>
                             </div>
                         </div>
                     </form>

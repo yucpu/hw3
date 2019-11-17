@@ -10,7 +10,7 @@ class ItemsList extends React.Component {
         const items = todoList.items;
         console.log("ItemsList: todoList.id " + todoList.id);
         return (
-            <div className="todo-lists section">
+            <div className="todo-lists section ">
                 {items && items.map(function(item) {
                     item.id = item.key;
                     return (
