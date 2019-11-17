@@ -1,7 +1,10 @@
 import React from 'react';
-import ItemScreen from '../ItemScreen';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { Link } from 'react-router-dom'
 class ItemCard extends React.Component {
+    
     setColor = (e) =>{
         if(e){
             //document.getElementById("Status_color").style.color = '#00FF40';
@@ -23,31 +26,132 @@ class ItemCard extends React.Component {
                     </div>
         }
     }
+    move_up = ()=> {
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items
+        let id = this.props.item.key
+        tempItems.forEach(element => {
+            delete element.id
+        });
+        if(id != 0){
+            let prevObj = tempItems[id-1]
+            let obj = tempItems[id]
+            let Obj1 = {
+                assigned_to: prevObj.assigned_to,
+                completed: prevObj.completed,
+                description: prevObj.description,
+                due_date: prevObj.due_date,
+                key: obj.key
+            }
+            let Obj2 = {
+                assigned_to: obj.assigned_to,
+                completed: obj.completed,
+                description: obj.description,
+                due_date: obj.due_date,
+                key: prevObj.key
+            }
+            tempItems[id-1] = Obj2
+            tempItems[id] = Obj1
+            ref.update({
+                "items" : tempItems
+            }).then(console.log("Successfully update new Data"))
+        }else{
+            console.log("first element")
+        }
+    }
+    move_down = () => {
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items
+        let id = this.props.item.key
+        tempItems.forEach(element => {
+            delete element.id
+        });
+        if(id != tempItems.length-1){
+            let prevObj = tempItems[id+1]
+            let obj = tempItems[id]
+            let Obj1 = {
+                assigned_to: prevObj.assigned_to,
+                completed: prevObj.completed,
+                description: prevObj.description,
+                due_date: prevObj.due_date,
+                key: obj.key
+            }
+            let Obj2 = {
+                assigned_to: obj.assigned_to,
+                completed: obj.completed,
+                description: obj.description,
+                due_date: obj.due_date,
+                key: prevObj.key
+            }
+            tempItems[id+1] = Obj2
+            tempItems[id] = Obj1
+            ref.update({
+                "items" : tempItems
+            }).then(console.log("Successfully update new Data"))
+        
+        }else{
+            console.log("Last element")
+        }
+
+    }
+    deleteItme=()=>{
+        let ref = this.props.firestore.collection("todoLists").doc(this.props.todoList.id);
+        let tempItems = this.props.todoList.items
+        let id = this.props.item.key
+        tempItems.forEach(element => {
+            delete element.id
+        });
+        tempItems.splice(id,1)
+        console.log(tempItems)
+        for (let i=0;i<tempItems.length;i++){
+            tempItems[i].key = i;
+        }
+        ref.update({
+            "items" : tempItems
+        }).then(console.log("Successfully update new Data"))
+        
+    }
     editCard = (e) =>{
         //return <Link to ="/todoList/:id/newItem"/>
-        console.log(this.props.todoList)
+        e.stopPropagation()
+        console.log("up")
     }
 
     render() {
-        const { item } = this.props;  
+        const { item } = this.props; 
+        
         return (
-            <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }  >
+            
                 <div className="card z-depth-0 todo-list-link pink-lighten-3" >
-                <div className="card-content grey-text text-darken-3">
+                <div className="card-content grey-text text-darken-3  ">
                     <span className="card-title float">
                         <div className="description">{item.description}</div>
                         <div className="due_date">{item.due_date}</div>
                         {this.setColor(item.completed)}
-                        <button id="move_up" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">keyboard_arrow_up</i></button>
-                        <button id="move_down" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">keyboard_arrow_down</i></button>
-                        <button id="delete" class="btn-floating btn-large waves-effect waves-light green"><i class="material-icons">clear</i></button>
+                        
+                        <button id="move_up" className="btn-floating btn-large waves-effect waves-light green" onClick={this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                        <button id="move_down" className="btn-floating btn-large waves-effect waves-light green" onClick={this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
+                        <button id="delete" className="btn-floating btn-large waves-effect waves-light green" onClick={this.deleteItme}><i class="material-icons">clear</i></button>
+                        
+                        <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }><button id="edit" className='btn-floating btn-large waves-effect waves-light green'><i className='material-icons'>edit</i></button></Link>
+                        
                     </span>
-                    <div className="card-content">{"Assigned_to:   "+ item.assigned_to}</div>        
+                    <div className="card-content">{"Assigned_to:   "+ item.assigned_to}</div>   
+
                 </div>
                 <hr/>
             </div>
-            </Link>
+        
         );
     }
 }
-export default ItemCard;
+
+
+
+  
+export default compose(
+    
+    firestoreConnect([
+      { collection: 'todoLists' },
+    ]),
+)(ItemCard);

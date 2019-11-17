@@ -73,7 +73,7 @@ class ListScreen extends Component {
                 </div>
                 <ItemsList todoList={todoList} />
                 <div>
-                <a id="newListButtonPosition" class="btn-floating btn-large waves-effect waves-light red" href = '/todoList/:id/newItem'>
+                <a id="newListButtonPosition" class="btn-floating btn-large waves-effect waves-light green" href = {'/todoList/'+todoList.id+'/temp/newItem'}>
                     <i class="material-icons">
                         add
                     </i>
@@ -89,9 +89,9 @@ const mapStateToProps = (state, ownProps) => {
   const { id } = ownProps.match.params;
   const { todoLists } = state.firestore.data;
   const todoList = todoLists ? todoLists[id] : null;
-  
   if(todoList)
     todoList.id = id;
+    
   return {
     todoList,
     auth: state.firebase.auth,

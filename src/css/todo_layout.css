@@ -81,6 +81,6 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 .completed{
   left: 42%;
 }
-#move_up,#move_down,#delete{
+#move_up,#move_down,#delete,#edit{
   left: 62%;
 }
