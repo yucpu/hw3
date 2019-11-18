@@ -1,8 +1,8 @@
 import React from 'react';
-import {Button} from 'react-materialize';
+
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 
 
 
@@ -122,6 +122,7 @@ class ItemCard extends React.Component {
 
     render() {
         const { item } = this.props; 
+        
         return (
             
                 <div className="card z-depth-0 todo-list-link pink lighten-3" >
@@ -135,13 +136,13 @@ class ItemCard extends React.Component {
                                 <div className="navBar"  > 
                                     <div className="anim"> 
                                     
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
                                         
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
                                         
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light green lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
                                         
-                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" >
+                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light purple lighten-1" >
                                             <i className="material-icons">edit</i>
                                         </a>
                                         <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1"  ><i className="material-icons">menu</i></button>
@@ -157,10 +158,14 @@ class ItemCard extends React.Component {
 }
 
 
-
+const mapStateToProps = (state) => {
+    return {
+      auth: state.firebase.auth,
+    };
+  };
   
 export default compose(
-    
+    connect(mapStateToProps),
     firestoreConnect([
       { collection: 'todoLists' },
     ]),

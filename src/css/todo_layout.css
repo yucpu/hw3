@@ -125,9 +125,9 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   height: 30px;
   margin: 20px auto 0;
   opacity: 0;
-  -webkit-transform: translateY(50px);
-      -ms-transform: translateY(50px);
-          transform: translateY(50px);
+  -webkit-transform: translateX(50px);
+      -ms-transform: translateX(50px);
+          transform: translateX(50px);
 }
 
 .navBar:hover 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -73,6 +74,9 @@ export class ItemScreen extends Component {
     }
     render() {
         const item = this.props.item
+        if (!this.props.auth.uid) {
+            return <Redirect to="/login" />;
+        }
         if(item){
             return (
                 <div className="row">

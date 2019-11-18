@@ -148,7 +148,7 @@ class ListScreen extends Component {
         const todoList = this.props.todoList;
         
         if (!auth.uid) {
-            return <Redirect to="/" />;
+            return <Redirect to="/login" />;
         }
         if(!todoList)
             return <React.Fragment />
