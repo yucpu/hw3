@@ -57,10 +57,10 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 }
 .Button_bar {
   overflow: hidden;
-  background-color:#669966;
+  
   font-family: Arial;
   height: 50px;
-  margin: auto;
+  ;
 }
 .Task,.Due_Date,.Status{
   float: left;

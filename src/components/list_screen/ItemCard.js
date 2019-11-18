@@ -130,29 +130,25 @@ class ItemCard extends React.Component {
                         <div className="description">{item.description}</div>
                         <div className="due_date">{item.due_date}</div>
                         {this.setColor(item.completed)}
-                                {/* <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }>
-                                    <button id="edit" className='speicalB' >
-                                        <i className='material-icons'>edit</i>
-                                        </button>
-                                </Link> */}
+                                
                                 
                                 <div className="navBar"  > 
                                     <div className="anim"> 
                                     
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
                                         
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
                                         
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light red" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
-                                        <Link to={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' }>
-
-                                        </Link>
-                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light red" ></a>
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light red"  ><i className="material-icons">menu</i></button>
+                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
+                                        
+                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1" >
+                                            <i className="material-icons">edit</i>
+                                        </a>
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1"  ><i className="material-icons">menu</i></button>
                                     </div>
                                 </div>   
                     </span>
-                    <div className="card-content">{"Assigned_to:   "+ item.assigned_to}</div>   
+                    <div className="card-content text-darken-3">{"Assigned_to:   "+ item.assigned_to}</div>   
                 </div>
             </div>
         
