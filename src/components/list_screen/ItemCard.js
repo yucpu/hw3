@@ -119,10 +119,25 @@ class ItemCard extends React.Component {
         //return <Link to ="/todoList/:id/newItem"/>
         console.log("up")
     }
+    buttonCreator=(type)=>{
+        if(type == 'up'){
+            return <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" 
+                            onClick = {this.move_up}
+                            disabled = {this.props.item.key==0 ? true: false}>
+                            <i class="material-icons">keyboard_arrow_up</i>
+                    </button>
+        }else if(type == 'down'){
+            return <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" 
+                           onClick = {this.move_down}
+                           disabled = {this.props.item.key == this.props.todoList.items.length-1 ? true:false}
+                           >
+                           <i class="material-icons">keyboard_arrow_down</i>
+                    </button>
+        }
+    }
 
     render() {
         const { item } = this.props; 
-        
         return (
             
                 <div className="card z-depth-0 todo-list-link pink lighten-3" >
@@ -136,10 +151,13 @@ class ItemCard extends React.Component {
                                 <div className="navBar"  > 
                                     <div className="anim"> 
                                     
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                                        {/* <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
                                         
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button>
-                                        
+                                        <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button> */}
+                                        {this.buttonCreator("up")}
+
+                                        {this.buttonCreator("down")}
+
                                         <button  className="speicalB btn-floating btn-small waves-effect waves-light green lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
                                         
                                         <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light purple lighten-1" >
@@ -160,6 +178,7 @@ class ItemCard extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
+       
       auth: state.firebase.auth,
     };
   };
