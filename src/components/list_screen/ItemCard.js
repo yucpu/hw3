@@ -10,13 +10,11 @@ class ItemCard extends React.Component {
     
     setColor = (e) =>{
         if(e){
-            //document.getElementById("Status_color").style.color = '#00FF40';
             
-            // return "Completed"
             let color ={
                 color:"#2e7d32"
             }
-            return <div className ="completed" style ={color}>
+            return <div className ="" style ={color}>
                     Completed
                     </div>
         }else{
@@ -24,7 +22,7 @@ class ItemCard extends React.Component {
             let color = {
                 color:'#FF0000'
             }
-            return <div className ="completed" style = {color}>
+            return <div className ="" style = {color}>
                     isPending
                     </div>
         }
@@ -140,36 +138,61 @@ class ItemCard extends React.Component {
         const { item } = this.props; 
         return (
             
-                <div className="card z-depth-0 todo-list-link pink lighten-3" >
-                <div className=" teal lighten-4">
-                    <span className="card-title float">
-                        <div className="description">{item.description}</div>
-                        <div className="due_date">{item.due_date}</div>
-                        {this.setColor(item.completed)}
+            //     <div className="card z-depth-0 todo-list-link pink lighten-3" >
+            //     <div className=" teal lighten-4">
+            //         <span className="card-title float">
+            //             <div className="description">{item.description}</div>
+            //             <div className="due_date">{item.due_date}</div>
+            //             {this.setColor(item.completed)}
                                 
                                 
-                                <div className="navBar"  > 
-                                    <div className="anim"> 
+            //                     <div className="navBar"  > 
+            //                         <div className="anim"> 
                                     
-                                        {/* <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+            //                             {/* <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
                                         
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button> */}
-                                        {this.buttonCreator("up")}
+            //                             <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button> */}
+            //                             {this.buttonCreator("up")}
 
-                                        {this.buttonCreator("down")}
+            //                             {this.buttonCreator("down")}
 
-                                        <button  className="speicalB btn-floating btn-small waves-effect waves-light green lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
+            //                             <button  className="speicalB btn-floating btn-small waves-effect waves-light green lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
                                         
-                                        <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light purple lighten-1" >
-                                            <i className="material-icons">edit</i>
-                                        </a>
-                                        <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1"  ><i className="material-icons">menu</i></button>
-                                    </div>
-                                </div>   
-                    </span>
-                    <div className="card-content text-darken-3">{"Assigned_to:   "+ item.assigned_to}</div>   
-                </div>
-            </div>
+            //                             <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light purple lighten-1" >
+            //                                 <i className="material-icons">edit</i>
+            //                             </a>
+            //                             <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1"  ><i className="material-icons">menu</i></button>
+            //                         </div>
+            //                     </div>   
+            //         </span>
+            //         <div className="card-content text-darken-3">{"Assigned_to:   "+ item.assigned_to}</div>   
+            //     </div>
+            // </div>
+            <tr>
+                <td>{item.description}<p>{"Assigned_to:   "+ item.assigned_to}</p></td>
+                <td>{item.due_date}<p>&#12288;</p></td>
+                <td>{this.setColor(item.completed)}<p>&#12288;</p></td>
+                <td>
+                        <div className="navBar"  > 
+                        <div className="anim"> 
+                        
+                                {/* <button  className="speicalB btn-floating btn-small waves-effect waves-light blue lighten-1" onClick = {this.move_up}><i class="material-icons">keyboard_arrow_up</i></button>
+                            
+                                <button className="speicalB btn-floating btn-small waves-effect waves-light yellow lighten-1" onClick = {this.move_down}><i class="material-icons">keyboard_arrow_down</i></button> */}
+                                {this.buttonCreator("up")}
+
+                                {this.buttonCreator("down")}
+
+                                <button  className="speicalB btn-floating btn-small waves-effect waves-light green lighten-1" onClick = {this.deleteItme}><i class="material-icons">clear</i></button>
+                            
+                                <a  href={'/todoList/'+this.props.todoList.id+"/"+item.key+'/newItem' } className="speicalB btn-floating btn-small waves-effect waves-light purple lighten-1" >
+                                    <i className="material-icons">edit</i>
+                                </a>
+                                <button className="speicalB btn-floating btn-small waves-effect waves-light pink lighten-1"  ><i className="material-icons">menu</i></button>
+                            </div>
+                        </div>
+                </td>
+            </tr>
         
         );
     }

@@ -165,14 +165,17 @@ class ListScreen extends Component {
                     <label htmlFor="password" className = "active">Owner</label>
                     <input className="active" type="text" name="owner" id="owner" onChange={this.handleChange} value={todoList.owner} />
                 </div>
-                <nav>
-                <div className="Button_bar grey darken-3 nav-wrapper">
-                    <div className="Task" onClick={this.sortByTask}>Task</div>
-                    <div className="Due_Date" onClick={this.sortByDue}>Due Date</div>
-                    <div className="Status" onClick={this.sortByStatus}>Status</div>
-                </div>
-                </nav>
-                <ItemsList todoList={todoList} />
+                <table>
+                    <thead>
+                    <tr>
+                        <th className="Task" onClick ={this.sortByTask}>Task</th>
+                        <th className="Due_Date" onClick ={this.sortByDue}>Due_Date</th>
+                        <th className="Status" onClick ={this.sortByStatus}>Status</th>
+                        <th></th>
+                    </tr>
+                    </thead>                    
+                        <ItemsList todoList={todoList} />
+                </table>
                 <div>
                 <a id="newListButtonPosition" class="btn-floating btn-middle waves-effect waves-light pink lighten-1" href = {'/todoList/'+todoList.id+'/temp/newItem'}>
                     <i class="material-icons">
@@ -200,15 +203,11 @@ class ListScreen extends Component {
                     <p>
                         Are you sure you want to delete this List?
                     </p>
-                    
                 </Modal>
-                
-
             </div>
         );
     }
 }
-
 const mapStateToProps = (state, ownProps) => {
   
   const { id } = ownProps.match.params;

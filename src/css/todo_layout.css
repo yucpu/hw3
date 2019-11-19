@@ -63,37 +63,15 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   ;
 }
 .Task,.Due_Date,.Status{
-  float: left;
-  font-size: 30px;
-  margin-right: 13.5%;
   cursor: pointer;
   
 }
-.Task{
-  left: 6%;
-}
-.description,.due_date,.completed{
-  float: left;
-  position: absolute;
-  margin-right: 15%;
-}
-.description{
-  left: 0%;
-}
-.due_date{
-  left: 21%;
-}
-.completed{
-  left: 50%;
-}
-#move_up,#move_down,#delete,#edit{
-   right: -40px;
-}
 
 
+/* animation */
 .navBar {
   bottom: 0;
-  position: absolute;
+  position: relative;
   margin: 1em;
   right: 0px;
 }
